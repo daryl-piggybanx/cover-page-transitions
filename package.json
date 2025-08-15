@@ -14,10 +14,12 @@
     "gsap": "^3.13.0",
     "imagesloaded": "^5.0.0",
     "isbot": "^5.1.27",
+    "motion": "^12.23.12",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router": "^7.7.1",
-    "split-type": "^0.3.4"
+    "split-type": "^0.3.4",
+    "swiper": "^11.2.10"
   },
   "devDependencies": {
     "@react-router/dev": "^7.7.1",

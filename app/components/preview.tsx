@@ -58,9 +58,13 @@ export default function Preview({ year, title, shortTitle, largeImage, isActive,
 
         // Initial setup - hide elements that will animate in
         timeline
-            .set([titleSpanRef.current, titleMetaRef.current, yearSpanRef.current, locationHeaderRef.current, materialHeaderRef.current, backButtonRef.current], {
+            .set([titleSpanRef.current, titleMetaRef.current, yearSpanRef.current, locationHeaderRef.current, materialHeaderRef.current], {
                 opacity: 0,
                 yPercent: 101
+            })
+            .set([backButtonRef.current], {
+                opacity: 0,
+                // Don't set yPercent for back button as it affects its positioning
             })
             .set([imageRef.current], {
                 y: '-101%'
@@ -93,9 +97,11 @@ export default function Preview({ year, title, shortTitle, largeImage, isActive,
                 stagger: 0.05
             }, 'content+=0.3')
             
+            // Back button fade in
             .to(backButtonRef.current, {
-                opacity: 1
-            }, 'content')
+                opacity: 1,
+                duration: 0.5
+            }, 'content+=0.5')
 
     }, [isActive, locationTextReveal, materialTextReveal])
 
@@ -136,20 +142,29 @@ export default function Preview({ year, title, shortTitle, largeImage, isActive,
                 isActive ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
             } md:grid md:gap-x-[10vw] md:gap-y-4 md:grid-cols-4 md:grid-rows-[1fr_auto_auto]`}
         >
-            {/* Preview Image - CSS: .preview__img */}
+            {/* Preview Image Desktop */}
             <div ref={imageRef} className="grid-area-image w-full min-h-[200px] overflow-hidden relative -translate-y-full pointer-events-none will-change-transform">
-                {/* Preview Image Inner - CSS: .preview__img-inner */}
                 <div 
                     ref={imageInnerRef}
                     className="bg-cover w-full h-full translate-y-full will-change-transform bg-[50%_35%]" 
                     style={{backgroundImage:`url(${largeImage})`}}
                 />
             </div>
-            
+
+            {/* Preview Image Mobile */}
+            <div className="absolute top-0 left-0 w-full h-1/2 z-[-1] sm:hidden">
+                <img src={largeImage} alt={title} className="w-full h-full object-cover" />
+            </div>
+
+            {/* overlay */}
+            <div className="absolute top-0 left-0 w-full h-3/4 z-[-1] sm:hidden">
+                <div className="w-full h-full bg-black opacity-20"></div>
+            </div>
+        
             {/* Preview Title - CSS: .preview__title */}
             <h2 className="grid-area-title relative overflow-hidden my-8 leading-[0.7] text-[clamp(2rem,18vw,15rem)] whitespace-nowrap font-light justify-self-center self-center font-[kudryashev-d-excontrast-sans,sans-serif] md:my-0">
                 {/* CSS: .oh__inner */}
-                <span ref={titleSpanRef} className="inline-block will-change-transform leading-[0.7] pt-[3%]">{shortTitle}</span>
+                <span ref={titleSpanRef} className="text-wrap inline-block will-change-transform leading-[0.7] pt-[3%]">{shortTitle}</span>
             </h2>
             
             {/* Preview Column Start - CSS: .preview__column--start */}
@@ -191,7 +206,7 @@ export default function Preview({ year, title, shortTitle, largeImage, isActive,
             <button 
                 ref={backButtonRef}
                 onClick={handleBackClick}
-                className="grid-area-back bg-none border-0 p-0 m-0 font-inherit my-8 mx-auto stroke-white cursor-pointer fill-none justify-self-start self-end hover:stroke-[#a17445] focus:outline-none md:my-0"
+                className="grid-area-back bg-none border-0 p-0 m-0 font-inherit my-8 mx-auto stroke-white cursor-pointer fill-none justify-self-start self-end hover:stroke-[#a17445] focus:outline-none md:my-0 pointer-events-auto opacity-0"
             >
                 <svg width="100px" height="18px" viewBox="0 0 50 9">
                     <path vectorEffect="non-scaling-stroke" d="m0 4.5 5-3m-5 3 5 3m45-3h-77"></path>

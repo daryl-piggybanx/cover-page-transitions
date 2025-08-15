@@ -66,26 +66,95 @@ body {
  :root {
 	font-size: 17px;
 	font-weight: 300;
-	--color-text: #000;
-	--color-text-alt: #fff;
-	--color-frame-alt: #a17445;
-	--color-bg: #c6c1b7;
-	--color-bg-alt: #18130e;
-	--color-link: #000;
-	--color-link-alt: #fff;
-	--color-link-hover: #000;
-	--color-link-hover-alt: #a17445;
-	--color-column-title: #727170;
-	--color-overlay: #000;
-	--color-border: #a0988a;
+	--cover-transition-text: #000;
+	--cover-transition-text-alt: #fff;
+	--cover-transition-frame-alt: #a17445;
+	--cover-transition-bg: #c6c1b7;
+	--cover-transition-bg-alt: #18130e;
+	--cover-transition-link: #000;
+	--cover-transition-link-alt: #fff;
+	--cover-transition-link-hover: #000;
+	--cover-transition-link-hover-alt: #a17445;
+	--cover-transition-column-title: #727170;
+	--cover-transition-overlay: #000;
+	--cover-transition-border: #a0988a;
 }
 
 body {
-	margin: 0;
-	color: var(--color-text);
-	background-color: var(--color-bg);
-	text-transform: uppercase;
 	font-family: acumin-pro, sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+}
+
+/* Swiper customizations */
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Custom navigation buttons */
+.swiper-button-prev-content,
+.swiper-button-next-content {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.swiper-button-prev-content:hover,
+.swiper-button-next-content:hover {
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* Custom pagination */
+.swiper-pagination-content {
+  bottom: 1rem !important;
+}
+
+.swiper-pagination-content .swiper-pagination-bullet {
+  background: #000;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+
+.swiper-pagination-content .swiper-pagination-bullet-active {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+.swiper-pagination-content .swiper-pagination-bullet {
+  margin: 0 0.5rem;
+}
+
+/* Grid template adjustments for main layout */
+.grid-template-main {
+  grid-template-columns: 100%;
+  grid-template-areas: 'frame' 'content';
+  grid-template-rows: min-content 1fr;
+}
+
+/* Mobile responsive adjustments */
+@media screen and (max-width: 768px) {
+  .swiper-button-prev-content,
+  .swiper-button-next-content {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  
+  .swiper-button-prev-content svg,
+  .swiper-button-next-content svg {
+    width: 16px;
+    height: 16px;
+  }
 }
