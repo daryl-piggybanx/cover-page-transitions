@@ -11,6 +11,9 @@ import { useGSAP } from '@gsap/react';
 import { Card } from "~/components/ui/card";
 
 import SunriseBackground from "../components/sunrise-background"
+import InfiniteMarquee from "../components/marquee"
+
+import { collaborators as mockCollaborators } from "../lib/mock-data"
 
 import acquireCards from "/img/acquire-cards.png"
 
@@ -74,29 +77,7 @@ const sections = [
     FifthSection,
 ];
 
-const collaborators = [
-    {
-        name: "Acquire",
-        image: acquireCards,
-        link: "/",
-    },
-    {
-        name: "Acquire",
-        image: acquireCards,
-        link: "/",
-    },
-    
-    {
-        name: "Acquire",
-        image: acquireCards,
-        link: "/",
-    },
-    {
-        name: "Acquire",
-        image: acquireCards,
-        link: "/",
-    },
-];
+
 
 export default function StackedScroll() {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -109,8 +90,8 @@ export default function StackedScroll() {
         const initCards = () => {
             const cardHeight = cards[0]?.offsetHeight || window.innerHeight;
             console.log("initCards()", cardHeight);
-            
-            // Clear any existing animations
+
+            // Clear any existing animations            
             gsap.killTweensOf(cards);
             
             // Set initial positions - stack cards on top of each other with offsets
@@ -209,7 +190,7 @@ function Collaborators({ index }: SectionProps) {
             {/* Three columns of text */}
             <motion.div className="grid grid-cols-3 gap-8 uppercase pt-20">
                 <motion.div 
-                    className="text-center text-white px-8 w-4xl"
+                    className="text-center text-white px-8 w-full max-w-4xl"
                     initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.1 }}
@@ -252,7 +233,9 @@ function Collaborators({ index }: SectionProps) {
                 </motion.div>
             </motion.div>
 
-            <div className="h-dvh"/>
+            <InfiniteMarquee items={mockCollaborators} />
+{/* 
+            <div className="h-dvh"/> */}
 
         </section>
     )

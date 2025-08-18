@@ -274,3 +274,30 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+
+@keyframes marquee-desktop {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-mobile {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-marquee-desktop {
+  animation: marquee-desktop 30s linear infinite;
+}
+
+.animate-marquee-mobile {
+  animation: marquee-mobile 20s linear infinite;
+}
