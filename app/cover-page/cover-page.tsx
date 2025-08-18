@@ -9,6 +9,7 @@ import type { Swiper as SwiperType } from 'swiper'
 import Preview from "../components/preview"
 import Content from "../components/content"
 
+
 // Import Swiper styles
 import 'swiper/css'
 import 'swiper/css/navigation'
