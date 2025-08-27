@@ -301,3 +301,21 @@ body {
 .animate-marquee-mobile {
   animation: marquee-mobile 20s linear infinite;
 }
+
+/* sword scroll down animation */
+.arrDown{
+  animation: anime infinite 1.5s linear;
+}
+
+@keyframes anime {
+  0%{
+    transform: translateY(-10px);
+  }
+  50%{
+    transform: translateY(5px);
+  }
+  100%{
+    transform: translateY(-10px);
+  }
+  
+}
