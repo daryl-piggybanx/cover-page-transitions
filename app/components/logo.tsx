@@ -1,7 +1,7 @@
 
 import React, { useRef } from 'react'
 import { useGLTF, MeshTransmissionMaterial, useTexture } from '@react-three/drei'
-import { Mesh, TextureLoader } from 'three'
+import { Group, Mesh, SpotLight, TextureLoader } from 'three'
 import type { ThreeElements, useLoader } from '@react-three/fiber'
 
 type ModelProps = ThreeElements['group'] & {
@@ -10,6 +10,9 @@ type ModelProps = ThreeElements['group'] & {
   useDeviceControl?: boolean
 }
 export default function LogoGlass(props: ModelProps) {
+  const group = useRef<Group>(null!)
+  const light = useRef<SpotLight>(null!)
+  const mesh = useRef<Mesh>(null!)
   const { nodes, materials } = useGLTF('/model/logo-glass-optimized.glb')
   
   console.log('nodes', nodes)
@@ -22,7 +25,7 @@ export default function LogoGlass(props: ModelProps) {
   })
   
   return (
-    <group {...props} dispose={null}>
+    <group ref={group} {...props} dispose={null}>
       <mesh
         castShadow
         receiveShadow
@@ -39,6 +42,9 @@ export default function LogoGlass(props: ModelProps) {
           opacity={1}
         />
       </mesh>
+      <spotLight angle={0.5} penumbra={0.5} ref={light} castShadow intensity={5} shadow-mapSize={1024} shadow-bias={-0.001}>
+        <orthographicCamera attach="shadow-camera" args={[-10, 10, -10, 10, 0.1, 50]} />
+      </spotLight>
     </group>
   )
 }

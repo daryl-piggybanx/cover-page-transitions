@@ -9,8 +9,8 @@ type ModelProps = ThreeElements['group'] & {
   useDeviceControl?: boolean
 }
 
-export function Model(props: ModelProps) {
-  const { nodes, materials } = useGLTF('/model/acrylic-case.glb')
+export default function AcrylicCase(props: ModelProps) {
+  const { nodes, materials } = useGLTF('/model/clear-acrylic-case.glb')
   return (
     <group {...props} dispose={null}>
       <group position={[0.03, 1.962, -0.009]}>
@@ -43,4 +43,4 @@ export function Model(props: ModelProps) {
   )
 }
 
-useGLTF.preload('/model/acrylic-case.glb')
+useGLTF.preload('/model/clear-acrylic-case.glb')
